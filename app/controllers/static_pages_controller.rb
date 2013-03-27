@@ -26,7 +26,7 @@ class StaticPagesController < ApplicationController
 			end
 		elsif (current_user)
 			if request.referer
-				if URI.split(request.referer)[2] == 'localhost' or URI.split(request.referer)[2] == "stormy-thicket-5927.herokuapp.com"
+				if URI.split(request.referer)[2] == 'localhost' or URI.split(request.referer)[2] == "afternoon-savannah-3679.herokuapp.com"
 					@user = current_user
 					@playlist = @user.default_list
 					@user_bookmark = @playlist.user_bookmarks.build
