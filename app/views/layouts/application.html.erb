@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Markr" %></title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <link rel="stylesheet" type="text/css" href="http://releases.flowplayer.org/5.3.2/skin/minimalist.css" />
+    <%= javascript_include_tag "application" %>
+    <script src="http://releases.flowplayer.org/5.3.2/flowplayer.min.js"></script>
+    <%= csrf_meta_tags %>
+    <%= yield(:head) %>
+  </head>
+  <body>
+    <%= render '/layouts/header' %>
+    <div class="container-fluid">
+      <!-- <div class="row-fluid"> -->
+        <%#= render '/layouts/messages' %>
+
+        <%= yield %>
+      <!-- </div> -->
+    </div> <!-- end of .container -->
+    <div id="modalHolder">
+    </div>
+    <%= render '/layouts/footer' %>
+  </body>
+</html>

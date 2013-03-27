@@ -1,0 +1,42 @@
+$bookmarklet(function (){
+	var newSS, styles='#bookmarklet .cleanslate * {margin:4px !important ; } #bookmarklet .cleanslate {background: #ADF8A2 !important ; font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif !important ; color:#0088cc !important ; font-size:13px !important ;border-radius: 10px !important ;border: 1px solid !important ;width: 300px !important ;top: 5px !important ;right: 30% !important ;position:fixed !important ;z-index:999998 !important ;} #bookmarklet .cleanslate  .floatright {float:right !important ;}';
+	if(document.createStyleSheet) { 
+		document.createStyleSheet("javascript:'"+styles+"'");
+	}
+	else {
+		newSS=document.createElement('link'); 
+		newSS.rel='stylesheet';
+		newSS.href='data:text/css,'+escape(styles);
+		document.getElementsByTagName("head")[0].appendChild(newSS);
+	}
+	$bookmarklet('body').append('<div id="bookmarklet"><div>');
+	$bookmarklet('#bookmarklet').html("<%=j render 'bookmarklet_content' %>");
+	$bookmarklet('#bookmarklet').on('click', '#new_user_bookmark a.submit_link', function(event){
+		event.preventDefault();
+		var postData = $bookmarklet('#bookmarklet form').serialize();
+		postData = postData+'&url='+window.location.href;
+		console.log(postData);
+		$bookmarklet.ajax({
+			url: $bookmarklet('#bookmarklet form').attr('action'),
+			type: 'POST',
+			data: postData,
+			dataType:'json',
+			success: function(data, textStatus, xhr){
+				$bookmarklet('#bookmarklet table').html("<h2>Success</h2>");
+				$bookmarklet('#bookmarklet .submit_link').remove();
+				$bookmarklet('#bookmarklet').children().last().prev().remove();
+				setTimeout(function(){
+					$bookmarklet(this).parents('#bookmarklet').remove();
+				}, 1500);
+			},
+			beforeSend: function(xhr, settings){
+				xhr.setRequestHeader('X-CSRF-Token', $bookmarklet('#bookmarklet meta[name="csrf-token"]').attr('content'));
+			},
+			crossDomain: true,
+		});
+	});
+	$bookmarklet('#bookmarklet').on('click', 'a.floatright', function(event){
+		event.preventDefault();
+		$bookmarklet(this).parents('#bookmarklet').remove();
+	});
+});

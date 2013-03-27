@@ -1,0 +1,39 @@
+<div class="modal hide fade new-bookmark-modal" tabindex="-1">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+		<h2>New Bookmark </h2>
+	</div>
+	<%= form_for @user_bookmark, :url => [@playlist, @user_bookmark] , :method => :post, :html => { "data-type" => "json"}, :remote=>true do |f|%>
+	<div class="modal-body">
+			<div style="padding-left: 50px; margin-right: 70px; float:right; border-left:1px solid #AAA">
+				<%= image_tag 'blood-drop-icon.png', :size => '90x90' %>
+				<h5 style="text-align:center;">Drag &amp; Drop </h5>
+				<h5 style="text-align:center;">Here</h5>
+			</div>
+			<%= f.text_field :bookmark_name, :placeholder=>'Bookmark Title' %><br /><br />
+			<%= f.fields_for :bookmark_url, @bookmark_url do |f_bu| %>
+				<%= f_bu.text_field :url, :placeholder=>'URL'%>
+			<% end %>
+	</div>
+	<div class="modal-footer">
+		<div class = "form-buttons">
+			<button type="submit" class="btn btn-primary">Submit Bookmark</button>
+	  	<button class="btn" data-dismiss="modal">Close</button>
+	  	<!-- <button class="btn" data-dismiss="modal">Add Another</button> -->
+	  </div>
+  	<div class = "alert-container-success">
+	  	<div class = "alert alert-success">
+	  		<a class="close" data-dismiss="alert" href="#">&times;</a>
+	  		Your bookmark was successfully created <%= link_to 'here', current_user %>. Close this alert to add another. 
+	  	</div>
+	  </div>
+  	<div class = "alert-container-error">
+	  	<div class = "alert alert-error alert-block">
+	  		<a class="close" data-dismiss="alert" href="#">&times;</a>
+	  		You had the following errors:
+	  		<!-- errors -->
+	  	</div>
+  	</div>
+  </div>
+  <% end %>
+</div>

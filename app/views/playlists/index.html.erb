@@ -1,0 +1,25 @@
+<div class="row-fluid">
+	<%= render '/layouts/sidebar' %>
+	<div class="span5">
+	<h1>Playlist index</h1><br />
+		<div class="row-fluid">
+			<div class="span5" %>
+				<% @lists.each do |pl| %>
+					<div class="playlist_links">
+						<%= link_to pl.playlist_name, pl %>
+					</div>
+				<% end %>
+			<br /><br />
+			<%= link_to 'Create New Playlist', new_playlist_path %>
+		</div>
+		<div class="span7"%>
+			<% @lists.each do |pl| %>
+				<div class="playlist_links">
+				  <%= link_to "<i class='icon-edit'></i> edit".html_safe, edit_playlist_path(pl), class: "btn btn-small btn-info"%>
+				  <%= link_to "<i class='icon-trash'></i> delete".html_safe, playlist_path(pl), class: "remove_playlist btn btn-small btn-danger", :remote => true, :method => :delete, :confirm => "This deletes the playlist and puts the otherwise un-playlisted videos on your home page" %>
+				  
+				</div>
+			<% end %>
+		</div>
+	</div>
+	</div></div>

@@ -1,0 +1,41 @@
+<%= render '/layouts/info_pane' %>
+<div class="row-fluid">
+<%= render '/layouts/sidebar' %>
+<div class="span5" id="bookmark_list_view">
+  <% if @user != current_user %>
+     <h3><%= @user.username %>'s</h3>
+   <% end %>
+  <h3>Unsorted Bookmarks</h3>
+  <% if current_user %>
+    <% if @playlist.user == current_user %>
+      <%= link_to 'Add A Link <i class="icon-plus icon-white"></i>'.html_safe, '', class:"btn btn-primary new-bookmark-modal-link", "data-toggle"=>"tooltip", "data-trigger"=>"manual", "data-title"=>"here", "data-placement"=>"right" %>
+      <div id="new-bookmark-modal-holder">
+          <%= render '/user_bookmarks/modal_new' %>
+      </div>
+    <% end %>
+  <% end %>
+  <br />
+  <div class="input-prepend">
+    <span class="add-on"><i class="icon-filter"></i></span>
+    <%= search_field_tag 'filter_uncategorized', '', :placeholder=>"Filter Bookmarks" , "data-toggle"=>"tooltip", "data-trigger"=>"manual", "data-title"=>"here", "data-placement"=>"bottom"%>
+  </div>
+  <div class="bookmark-list">
+    <% @playlist.user_bookmarks.reverse.each_with_index do |user_bookmark,i| %>
+
+      <% if i > 0 and !user_bookmark.id.nil? %>
+        <hr>
+      <% end %>
+      
+      <% if user_bookmark.id %>
+        <%= render :partial =>'/user_bookmarks/bookmark_fields.html.erb', :locals => {:user_bookmark => user_bookmark} %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="span4">
+  <div id="detail_bookmark_view_container">
+    <div id="detail_bookmark_view">
+    </div>
+  </div>
+</div>
+</div>

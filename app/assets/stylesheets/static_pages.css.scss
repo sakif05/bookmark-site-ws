@@ -1,0 +1,115 @@
+.home, .info, .info2 {
+	h1, h2, h3, h4, h5, a{
+		text-align: center;
+	}
+}
+.info {
+	//this is because the navbar was obscuring the anchor
+	h2 {
+		padding-top: 40px;
+		margin-top: -40px;
+	}
+	p.contains_bookmarklet {
+		display:inline-block;
+		img {
+			vertical-align:middle;
+		}
+	}
+	p {
+		text-align:justify;
+		color:#666666;
+	}
+	li {
+		color:#666666;
+	}
+}
+
+.info2{ 
+
+	.span4 {
+		margin-left:8px;
+	}
+}
+div.feature {
+	div {
+		cursor:pointer;
+		background:#EAEAFF;
+		width:115px;
+		height:135px;
+		margin:0px;
+		border: 0px solid;
+		border-radius:8px;
+		background-repeat:no-repeat;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	a {
+		border-bottom-right-radius:0px;
+		border-bottom-left-radius:0px;
+		border-top-right-radius:8px;
+		border-top-left-radius:8px;
+	}
+	img {
+		height:105px;
+		margin-left:auto;
+		margin-right:auto;
+		display:block;
+	}
+}
+
+.more-info {
+	display: none;
+	text-align: justify;
+	padding-left:7px;
+	padding-right:7px;
+	padding-top:7px;
+}
+
+.hero-unit{
+	background: url('forest2.png') no-repeat 50% 50%;
+	background-size:cover;
+	//filter: alpha(opacity=30);  
+  //-moz-opacity: 0.3;  
+  //-khtml-opacity: 0.3;  
+  //opacity: 0.3; 
+}
+
+.options {
+}
+
+//to horizontall center a button in a block element
+.center-button-table {
+  display: table;
+  width: 100%;
+	.center-button-cell {
+		display: table-cell;
+		text-align: center;
+		vertical-align: middle;
+	}
+}
+
+#signup-modal-holder {
+	display:none;
+}
+
+.signup-modal {
+	.form-buttons {
+		margin: 0 0 0 0;
+	}
+	.alert-container-success {
+		display:none;
+		margin-top:15px;
+	}
+	.alert-container-error{
+		display:none;
+		ul {
+			list-style-type:none;
+		}
+	}
+	.alert-success, .alert-error {
+		margin-bottom:0px;
+	}
+	form {
+		margin:0px
+	}
+}

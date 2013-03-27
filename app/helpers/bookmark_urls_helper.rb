@@ -1,0 +1,2 @@
+module BookmarkUrlsHelper
+end

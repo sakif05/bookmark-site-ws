@@ -1,0 +1,24 @@
+<div class = "cleanslate">
+<div style="display:none"><%= csrf_meta_tags %></div>
+<div class="floatright">
+<% if !(current_user.nil?) %>
+	Hi <%= current_user.username %><br />
+<% end %>
+</div>
+<!-- 'http://www.vrepo.com/jsfiles/process_bookmarklet' -->
+<!-- 'http://intense-plains-9735.herokuapp.com/jsfiles/process_bookmarklet' -->
+<%= form_for @user_bookmark, :id=>"bookmarklet-link-form", :url => 'http://stormy-thicket-5927.herokuapp.com/jsfiles/process_bookmarklet', :html => { "data-type" => :json, :method => :post, :remote => true} do |f| %> 
+<table><th></th><th></th>
+<tr><td>
+	<%= f.label :bookmark_name, 'Title' %></td><td>
+	<%= f.text_field :bookmark_name %><br /></td></tr>
+	<%= hidden_field_tag 'bookmarklet_user_key', current_user.bookmarklet_user_key %>
+	<% if current_user.lists.count > 0 %>
+		<tr><td>
+	<%= label_tag 'playlist_id', 'Playlist' %></td><td>
+		<%= select_tag 'playlist_id', options_from_collection_for_select(current_user.lists, "id","playlist_name"), :include_blank => true %>
+	<% end %><br /></td></tr></table>
+	<%= link_to 'Book It!', '#', class: 'submit_link' %>
+	<%= link_to 'Close', '#', class: 'floatright' %>
+<% end %>
+</div>

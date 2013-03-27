@@ -1,0 +1,64 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li><%= link_to "Markr".html_safe, welcome_path, class:"logo", style:"color:#3880FF" %></li>
+          <li><%= link_to "<img src='/assets/glyphicons/glyphicons_195_circle_info.png'></img> Info".html_safe, info_path %></li>
+          <li data-toggle="tooltip" data-trigger="manual" data-placement="bottom" id="bookmark_bar" title="Bookmark Bar: (If there's no bookmark bar under the address bar, you can probably enable it)" style="position:fixed; left:25%;"></li>
+          <li><%= link_to "<img src='/assets/glyphicons/glyphicons_010_envelope.png'></img> Contact".html_safe, contact_path %></li>
+        </ul>
+          <% if current_page?(current_user) or current_page?(username_path(current_user))%>
+            <div style="position:absolute; left:47%; top:29px; background:#1b1b1b; height:14px">
+              <a class="btn btn-mini btn-inverse info-pane-button">Expand <i class="icon-chevron-down"></i></a>
+            </div>
+          <% end %>
+        <ul class="nav pull-right">
+        	<% if current_user.nil? %>
+          	<!-- <li><a href="#">1 Click Save</a></li> -->
+            <%= form_tag sessions_path, class:"navbar-form pull-left" do %>
+              <%= text_field_tag :username, '', :placeholder => 'Username' ,id:"navbar-input-1"%>
+              <%= password_field_tag :password,'', :placeholder=>'Password' ,id:"navbar-input-2"%>
+              <button type="submit" class="btn btn-small" id="navbar-form-button">Sign in</button>
+            <% end %>
+            <li class="divider-vertical"></li>
+            <li><a href="/signup">Sign Up</a></li>
+             <!--<li class="dropdown">
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
+              <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+                <%#= form_tag sessions_path do %>
+							    <%#= text_field_tag :username, params[:username], :placeholder => 'Username' %>
+							    <%#= password_field_tag :password,'', :placeholder=>'Password' %>
+                  <button type="submit" class="btn">Sign in</button>
+								<%# end %>
+              </div>
+            </li> -->
+          <% else %>
+            <div class="navbar-form pull-left"><a class="btn btn-inverse" id="login-btn"><i class="icon-white icon-heart"></i> Returning Users</a></div>
+            <!-- <div style="display:none;" id="nav-login"> -->
+              <%= form_tag sessions_path, class:"navbar-form pull-left", style:"display:none", id:"nav-login" do %>
+                <%= text_field_tag :username, '', :placeholder => 'Username' ,id:"navbar-input-1"%>
+                <%= password_field_tag :password,'', :placeholder=>'Password' ,id:"navbar-input-2"%>
+                <button type="submit" class="btn btn-small" id="navbar-form-button">Sign in</button>
+              <% end %>
+            <!-- </div> -->
+            <li class="divider-vertical"></li>
+            <% if current_user.human or !current_page?(:controller => 'static_pages', :action=>'welcome') %>
+              <li class="dropdown">
+            <% else %>
+              <li class="dropdown" id="temp-acct-popover-holder" data-html=true data-toggle="popover" data-placement="bottom" data-trigger="manual" data-content="<div id=temp-acct-popover>An account has been created for you.<hr>The password is the same as the username. <hr>Since this is a temp. account, your account gets wiped when you leave unless you confirm you're human.</div>">
+            <% end %>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src='/assets/glyphicons/glyphicons_003_user.png'> </img><%= current_user.username %> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+	            	<li><%=link_to "Home", current_user , "tabindex" => "-1"%></li>
+								<li><%=link_to "User Settings", edit_user_path(current_user), "tabindex" => "-1"%></li>
+                <li class="divider"></li>
+								<li><%= link_to 'Log Out', logout_path , "tabindex" => "-1"%></li>
+              </ul>
+            </li>
+          <% end %>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
